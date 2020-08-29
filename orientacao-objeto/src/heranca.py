@@ -1,4 +1,16 @@
 ##Classe criada para estudar herança e afins
+class Playlist():
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self.__programas = programas
+
+    ##Utilizando o duck typing do python para poder adquirir comportamentos de uma lista
+    def __getitem__(self, item):
+        return self.__programas[item]
+
+    def __len__(self):
+        return len(self.__programas)
+
 class Programa:
     def __init__(self, nome, ano):
         self._nome = nome.title() #por convenção utiliza-se um underscore para demonstrar que o atributo é privado, e não ter problemas com o name mangling do python

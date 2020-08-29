@@ -1,6 +1,6 @@
 from src.conta import Conta
 from src.datas import Data
-from src.heranca import Programa, Filme, Serie
+from src.heranca import Programa, Filme, Serie, Playlist
 
 def test_class_conta():
     print("Testando classe conta...")
@@ -32,9 +32,10 @@ def test_class_heranca():
     atlanta.dar_likes()
     atlanta.dar_likes()
 
-    playlist = [vingadores, atlanta]
+    programas = [vingadores, atlanta]
+    playlist_fds = Playlist('Os melhores', programas)
 
-    for programa in playlist:
+    for programa in playlist_fds:
         print(programa)
 
 ###
