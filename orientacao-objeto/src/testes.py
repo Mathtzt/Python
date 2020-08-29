@@ -1,5 +1,6 @@
 from src.conta import Conta
 from src.datas import Data
+from src.heranca import Programa, Filme, Serie
 
 def test_class_conta():
     print("Testando classe conta...")
@@ -20,6 +21,21 @@ def test_class_data():
     data = Data(12, 5, 2020)
     data.format()
 
+def test_class_heranca():
+    print("Testando classe herança...")
+    vingadores = Filme('vingadores - guerra infinita', 2018, 160)
+    atlanta = Serie('atlanta', 2018, 2)
+    vingadores.dar_likes()
+    vingadores.dar_likes()
+    vingadores.dar_likes()
+
+    atlanta.dar_likes()
+    atlanta.dar_likes()
+
+    playlist = [vingadores, atlanta]
+
+    for programa in playlist:
+        print(programa)
 
 ###
 if (__name__ == "__main__"):
@@ -27,3 +43,5 @@ if (__name__ == "__main__"):
     test_class_conta()
     print()
     test_class_data()
+    print()
+    test_class_heranca()
