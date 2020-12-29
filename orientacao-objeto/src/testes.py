@@ -1,61 +1,31 @@
-from src.conta import Conta
-from src.datas import Data
-from src.heranca import Programa, Filme, Serie, Playlist
-from src.heranca_multipla import Tutor
+from src.heranca_multipla import Tutor, Professor
 
-def test_class_conta():
-    print("** Testando classe conta...")
-    conta = Conta(3512, "Exemplo", 500.0, 1500.0)
-    conta2 = Conta(1412, "Exemplo2", 250.0, 1500.0)
-    conta.extrato()
-    conta.deposita(150.0)
-    conta.extrato()
-    conta.tranfere(250, conta2)
-    conta.extrato()
-    conta2.extrato()
-    conta.saca(2000)
-    print(Conta.codigo_banco())
-    print(Conta.codigo_banco_list())
+"""
+Método definido para realização dos testes da aplicação, como solicitados.
+"""
+def tests():
+    print("** Testes da aplicação")
 
-def test_class_data():
-    print("** Testando classe data...")
-    data = Data(12, 5, 2020)
-    data.format()
-
-def test_class_heranca():
-    print("** Testando classe herança...")
-    vingadores = Filme('vingadores - guerra infinita', 2018, 160)
-    atlanta = Serie('atlanta', 2018, 2)
-    vingadores.dar_likes()
-    vingadores.dar_likes()
-    vingadores.dar_likes()
-
-    atlanta.dar_likes()
-    atlanta.dar_likes()
-
-    programas = [vingadores, atlanta]
-    playlist_fds = Playlist('Os melhores', programas)
-
-    for programa in playlist_fds:
-        print(programa)
-
-def test_class_heranca_multipla():
-    print("** Testando classe herança multipla...")
-    jose = Tutor('José')
+    jose = Tutor('José', 40) ## Instanciando o objeto do tipo Tutor, passando o nome e idade como parâmetros.
+    fabio = Professor('Fábio', 51) ## Instanciando o objeto do tipo Professor, passando o nome e idade como parâmetros.
+    print("\nTESTE 1 ============")
+    print(f"A idade do josé é: {jose.idade}")
+    print("\nTESTE 2 ============")
     jose.registra_horas(12)
+    print("\nTESTE 3 ============")
     jose.mostrar_tarefas()
+    print("\nTESTE 4 ============")
     jose.buscar_lista_atendimentos()
-
-    ##testar se mixin está correto
+    print("\nTESTE 5 ============") ##testar se mixin está correto
     print(jose)
 
-###
-if (__name__ == "__main__"):
-    print()
-    test_class_conta()
-    print()
-    test_class_data()
-    print()
-    test_class_heranca()
-    print()
-    test_class_heranca_multipla()
+    print("\nTESTE 6 ============") ##testando polimorfismo
+    fabio.mostrar_tarefas()
+    print("\nTESTE 7 ============") ##testando método próprio do professor
+    fabio.buscar_turmas_do_mes('fevereiro')
+"""
+Quando rodamos diretamente um arquivo no Python, ele internamente cria uma variável e a preenche.
+Essa variável é a __name__, e ela é preenchida com o valor __main__ caso o arquivo seja executado diretamente. Vamos então fazer if para verificar se ela está preenchida ou não para assim rodar os tests, assegurando que o programa executará corretamente independentemente de como ele for executado:
+"""
+if (__name__ == "__main__"): ## Os parenteses são opcionais. Eu decidi por os colocar.
+    tests() ## Chamando método que rodará os testes da nossa aplicação.
