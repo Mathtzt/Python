@@ -14,9 +14,9 @@ class DominioUtils:
         lance_do_joao = Lance(joao, 150)
 
         leilao = Leilao('Churrasqueira')
-        leilao.lances.append(lance_da_ana)
-        leilao.lances.append(lance_do_math)
-        leilao.lances.append(lance_do_joao)
+        leilao.realizar_lance(lance_da_ana)
+        leilao.realizar_lance(lance_do_math)
+        leilao.realizar_lance(lance_do_joao)
         return leilao
 
     @staticmethod
@@ -25,7 +25,7 @@ class DominioUtils:
         lance_do_fabio = Lance(fabio, 150)
 
         leilao = Leilao('Celular')
-        leilao.lances.append(lance_do_fabio)
+        leilao.realizar_lance(lance_do_fabio)
 
         return leilao
 
