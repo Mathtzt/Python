@@ -34,9 +34,14 @@ class Leilao:
         return deepcopy(self.__lances)  # dessa forma estamos criando um cópia profunda da lista em questão
 
     def realizar_lance(self, lance):
-        self.__lances.append(lance)
+        if not self.__lances or \
+                (self.__lances[-1].usuario.nome != lance.usuario.nome and self.__lances[-1].valor < lance.valor):  # index -1, busca o ultimo item da lista
 
-        if lance.valor > self.maior_lance:
-            self.maior_lance = lance.valor
-        if lance.valor < self.menor_lance:
-            self.menor_lance = lance.valor
+            self.__lances.append(lance)
+
+            if lance.valor > self.maior_lance:
+                self.maior_lance = lance.valor
+            if lance.valor < self.menor_lance:
+                self.menor_lance = lance.valor
+        else:
+            raise ValueError("O mesmo usuário não pode propor dois lances seguidos e o lance não pode ser inferior ao ultimo lance realizado")

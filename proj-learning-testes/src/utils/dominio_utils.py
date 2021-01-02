@@ -20,12 +20,14 @@ class DominioUtils:
         return leilao
 
     @staticmethod
-    def gera_lance_unico_leilao():
-        fabio = Usuario("Fabio")
-        lance_do_fabio = Lance(fabio, 150)
+    def gera_lance_unico_leilao(leilao=None, nome_apostador="Fabio", valor=150):
+        nome = Usuario(nome_apostador)
+        lance_do_apostador = Lance(nome, valor)
 
-        leilao = Leilao('Celular')
-        leilao.realizar_lance(lance_do_fabio)
+        if leilao is None:
+            leilao = Leilao('Celular')
+            leilao.realizar_lance(lance_do_apostador)
+        else:
+            leilao.realizar_lance(lance_do_apostador)
 
         return leilao
-
