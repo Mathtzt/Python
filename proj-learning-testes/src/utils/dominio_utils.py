@@ -10,13 +10,13 @@ class DominioUtils:
         joao = Usuario("Joao")
 
         lance_da_ana = Lance(ana, 100)
-        lance_do_math = Lance(math, 200)
         lance_do_joao = Lance(joao, 150)
+        lance_do_math = Lance(math, 200)
 
         leilao = Leilao('Churrasqueira')
         leilao.realizar_lance(lance_da_ana)
-        leilao.realizar_lance(lance_do_math)
         leilao.realizar_lance(lance_do_joao)
+        leilao.realizar_lance(lance_do_math)
         return leilao
 
     @staticmethod
