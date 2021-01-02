@@ -1,4 +1,6 @@
 import sys
+from copy import deepcopy
+
 
 class Usuario:
 
@@ -23,12 +25,13 @@ class Leilao:
         self.descricao = descricao
         self.__lances = []
 
-        self.maior_lance = sys.float_info.min #menor valor que o float pode ter no sistema
-        self.menor_lance = sys.float_info.max #maior valor que o float pode ter no sistema
+        self.maior_lance = sys.float_info.min  # menor valor que o float pode ter no sistema
+        self.menor_lance = sys.float_info.max  # maior valor que o float pode ter no sistema
 
     @property
     def lances(self):
-        return self.__lances[:] ##colocando o [:] estamos devolvendo uma cópia rasa da lista em questão
+        # return self.__lances[:] ##colocando o [:] estamos devolvendo uma cópia rasa da lista em questão
+        return deepcopy(self.__lances)  # dessa forma estamos criando um cópia profunda da lista em questão
 
     def realizar_lance(self, lance):
         self.__lances.append(lance)
