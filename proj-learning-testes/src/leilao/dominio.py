@@ -17,7 +17,7 @@ class Usuario:
         return self.__carteira
 
     def fazer_lance(self, leilao, valor):
-        if self._eh_valor_valido(valor):
+        if not self._eh_valor_valido(valor):
             raise ValueError("Valor superior ao disponível na carteira!")
 
         lance_do_apostador = Lance(self, valor)
@@ -30,7 +30,7 @@ class Usuario:
         self.__carteira += valor
 
     def _eh_valor_valido(self, valor):
-        return valor > self.__carteira
+        return valor < self.__carteira
 
 
 class Lance:
