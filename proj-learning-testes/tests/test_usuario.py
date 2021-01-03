@@ -6,6 +6,8 @@ Ele buscara os métodos dentro da pasta test e os métodos com a nomeclatura tes
 from src.leilao.dominio import Usuario, Leilao
 import pytest
 
+from src.utils.excessoes import LanceInvalido
+
 
 @pytest.fixture
 def stp_usuario():
@@ -28,5 +30,5 @@ def test_deve_permitir_fazer_lance_quando_o_valor_for_menor_ou_igual_valor_carte
 
 
 def test_nao_deve_permitir_fazer_lance_quando_o_valor_for_superior_valor_carteira(stp_usuario, stp_leilao):
-    with pytest.raises(ValueError):
+    with pytest.raises(LanceInvalido):
         stp_usuario.fazer_lance(stp_leilao, 1500)

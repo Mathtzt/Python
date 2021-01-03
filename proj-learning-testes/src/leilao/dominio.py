@@ -1,5 +1,6 @@
-import sys
 from copy import deepcopy
+
+from src.utils.excessoes import LanceInvalido
 
 
 class Usuario:
@@ -17,11 +18,9 @@ class Usuario:
         return self.__carteira
 
     def fazer_lance(self, leilao, valor):
-        if not self._eh_valor_valido(valor):
-            raise ValueError("Valor superior ao disponível na carteira!")
-
-        lance_do_apostador = Lance(self, valor)
-        leilao.realizar_lance(lance_do_apostador)
+        if self._eh_valor_valido(valor):
+            lance_do_apostador = Lance(self, valor)
+            leilao.realizar_lance(lance_do_apostador)
 
     def debita_carteira(self, valor):
         self.__carteira -= valor
@@ -30,7 +29,9 @@ class Usuario:
         self.__carteira += valor
 
     def _eh_valor_valido(self, valor):
-        return valor < self.__carteira
+        if valor < self.__carteira:
+            return True
+        raise LanceInvalido("Valor superior ao disponível na carteira!")
 
 
 class Lance:
@@ -66,18 +67,19 @@ class Leilao:
 
             self.__lances.append(lance)
             lance.usuario.debita_carteira(lance.valor)
-        else:
-            raise ValueError(
-                "O mesmo usuário não pode propor dois lances seguidos e o lance não pode ser inferior ao ultimo lance realizado")
 
     def _lances_vazios(self):
         return not self.__lances
 
     def _usuario_diferente_do_ultimo_lance(self, lance):
-        return self.__lances[-1].usuario.nome != lance.usuario.nome  # index -1, busca o ultimo item da lista
+        if self.__lances[-1].usuario.nome != lance.usuario.nome:  # index -1, busca o ultimo item da lista
+            return True
+        raise LanceInvalido("O mesmo usuário não pode dar dois lances seguidos")
 
     def _valor_superior_ao_ultimo_lance(self, lance):
-        return self.__lances[-1].valor < lance.valor
+        if self.__lances[-1].valor < lance.valor:
+            return True
+        raise LanceInvalido("O valor do lance deve ser maior que o lance anterior")
 
     def _eh_lance_valido(self, lance):
         return self._lances_vazios() or \

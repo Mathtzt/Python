@@ -1,4 +1,6 @@
 from unittest import TestCase
+
+from src.utils.excessoes import LanceInvalido
 from src.utils.dominio_utils import DominioUtils
 
 
@@ -72,11 +74,11 @@ class TestLeilao(TestCase):
         )
 
     def test_nao_deve_permitir_fazer_lance_consecutivo_por_mesmo_apostador(self):
-        with self.assertRaises(ValueError):  # teste para verificar se a exceção realmente está sendo lançada
+        with self.assertRaises(LanceInvalido):  # teste para verificar se a exceção realmente está sendo lançada
             leilao = DominioUtils.gera_lance_unico_leilao()
             DominioUtils.gera_lance_unico_leilao(leilao)
 
     def teste_nao_deve_permitir_fazer_lance_com_valor_inferior_ao_ultimo_lance(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(LanceInvalido):
             leilao = DominioUtils.gera_lance_unico_leilao()
             DominioUtils.gera_lance_unico_leilao(leilao, "Carla", 60)
