@@ -5,9 +5,9 @@ class DominioUtils:
 
     @staticmethod
     def gera_lances_leilao():
-        math = Usuario("Math")
-        ana = Usuario("Ana")
-        joao = Usuario("Joao")
+        math = Usuario("Math", 500)
+        ana = Usuario("Ana", 750)
+        joao = Usuario("Joao", 480)
 
         lance_da_ana = Lance(ana, 100)
         lance_do_joao = Lance(joao, 150)
@@ -21,7 +21,7 @@ class DominioUtils:
 
     @staticmethod
     def gera_lance_unico_leilao(leilao=None, nome_apostador="Fabio", valor=150):
-        nome = Usuario(nome_apostador)
+        nome = Usuario(nome_apostador, 500)
         lance_do_apostador = Lance(nome, valor)
 
         if leilao is None:

@@ -4,12 +4,30 @@ from copy import deepcopy
 
 class Usuario:
 
-    def __init__(self, nome):
+    def __init__(self, nome, carteira):
         self.__nome = nome
+        self.__carteira = carteira
 
     @property
     def nome(self):
         return self.__nome
+
+    @property
+    def carteira(self):
+        return self.__carteira
+
+    def fazer_lance(self, leilao, valor):
+        if valor > self.__carteira:
+            raise ValueError("Valor superior ao disponível na carteira!")
+
+        lance_do_apostador = Lance(self, valor)
+        leilao.realizar_lance(lance_do_apostador)
+
+    def debita_carteira(self, valor):
+        self.__carteira -= valor
+
+    def deposita_carteira(self, valor):
+        self.__carteira += valor
 
 
 class Lance:
@@ -38,6 +56,7 @@ class Leilao:
                 (self.__lances[-1].usuario.nome != lance.usuario.nome and self.__lances[-1].valor < lance.valor):  # index -1, busca o ultimo item da lista
 
             self.__lances.append(lance)
+            lance.usuario.debita_carteira(lance.valor)
 
             if lance.valor > self.maior_lance:
                 self.maior_lance = lance.valor

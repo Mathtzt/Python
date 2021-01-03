@@ -1,5 +1,4 @@
 from unittest import TestCase
-
 from src.utils.dominio_utils import DominioUtils
 
 
